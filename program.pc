@@ -1,0 +1,10 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: program
+Description: A sample C++ program
+Version: 0.1
+Libs: -L${libdir} -lprogram
+Cflags: -I${includedir}
