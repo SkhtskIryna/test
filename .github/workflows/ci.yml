@@ -1,10 +1,10 @@
-name: Makefile CI
+name: Automake CI
 
 on:
   push:
-    branches: [ "branchMake" ]
+    branches: [ "branchAutomake" ]
   pull_request:
-    branches: [ "branchMake" ]
+    branches: [ "branchAutomake" ]
 
 jobs:
   build:
@@ -12,12 +12,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
+
       - name: Install build tools
-        run: sudo apt-get install -y build-essential
-      
+        run: sudo apt-get install -y automake autoconf
+
       - name: Build
-        run: make
-      
-      - name: Run the executable
-        run: ./program
+        run: |
+          aclocal
+          automake --add-missing
+          autoconf
+          ./configure
+          make
+          make dist
